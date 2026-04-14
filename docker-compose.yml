@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # ─── PostgreSQL Database ───
+  postgres:
+    image: postgres:16-alpine
+    container_name: careernest-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: careernest
+      POSTGRES_USER: careernest
+      POSTGRES_PASSWORD: careernest_secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U careernest"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── Spring Boot Backend ───
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: careernest-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/careernest
+      SPRING_DATASOURCE_USERNAME: careernest
+      SPRING_DATASOURCE_PASSWORD: careernest_secret
+      JWT_SECRET: YTJmNzRkOGUtMjFhZC00ZjE1LTkwMTAtYWM1ZjA2Y2Q1MWIzCareerNestSuperSecretKey2026
+      JWT_EXPIRATION: 86400000
+    ports:
+      - "8080:8080"
+    volumes:
+      - uploads:/app/uploads
+
+  # ─── React Frontend (Nginx) ───
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: careernest-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:80"
+
+volumes:
+  postgres_data:
+  uploads:

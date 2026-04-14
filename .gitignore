@@ -1,0 +1,39 @@
+# ============= Root =============
+.env
+*.log
+
+# ============= Java / Spring Boot =============
+backend/target/
+backend/*.jar
+backend/*.war
+backend/.mvn/wrapper/maven-wrapper.jar
+!backend/.mvn/wrapper/maven-wrapper.properties
+
+# IDE
+.idea/
+*.iml
+*.iws
+.project
+.classpath
+.settings/
+*.swp
+*.swo
+*~
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============= Node / React =============
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/.env.production
+
+# ============= Docker =============
+docker-compose.override.yml
+
+# ============= Uploads =============
+uploads/

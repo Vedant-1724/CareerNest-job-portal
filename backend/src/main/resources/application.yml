@@ -1,0 +1,51 @@
+# ═══════════════════════════════════════════════════════
+#  CareerNest — Application Configuration
+# ═══════════════════════════════════════════════════════
+
+spring:
+  application:
+    name: careernest
+
+  # ─── JPA / Hibernate ───
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # ─── PostgreSQL Datasource ───
+  datasource:
+    url: jdbc:postgresql://localhost:5432/careernest
+    username: careernest
+    password: careernest_secret
+    driver-class-name: org.postgresql.Driver
+
+  # ─── File Upload ───
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# ─── Server ───
+server:
+  port: 8080
+
+# ─── JWT ───
+app:
+  jwt:
+    secret: YTJmNzRkOGUtMjFhZC00ZjE1LTkwMTAtYWM1ZjA2Y2Q1MWIzCareerNestSuperSecretKey2026
+    expiration: 86400000  # 24 hours in milliseconds
+
+# ─── File Upload Path ───
+  upload:
+    dir: ./uploads
+
+# ─── Logging ───
+logging:
+  level:
+    com.careernest: DEBUG
+    org.springframework.security: INFO
