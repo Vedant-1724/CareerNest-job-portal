@@ -1,178 +1,244 @@
-# 🪺 CareerNest — Job & Internship Portal
+# 🚀 CareerNest – Full-Stack Job & Internship Portal
 
-A production-grade, full-stack job and internship platform built with **Java Spring Boot** (backend) and **React** (frontend).
-
-![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0-brightgreen?style=flat-square)
-![React](https://img.shields.io/badge/React-18-blue?style=flat-square)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?style=flat-square)
-![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=flat-square)
+> *A scalable full-stack recruitment platform connecting talent with opportunity.*
 
 ---
 
-## 🏗 Architecture
+## 📌 Overview
 
-```
-┌─────────────┐     ┌─────────────────┐     ┌──────────────┐
-│   React UI  │────▶│  Spring Boot    │────▶│  PostgreSQL  │
-│  (Vite/Nginx)│     │  REST API       │     │  Database    │
-└─────────────┘     └─────────────────┘     └──────────────┘
-     :3000               :8080                   :5432
-```
+**CareerNest** is a full-stack Job and Internship Portal designed to bridge the gap between job seekers and recruiters. It provides a seamless platform where users can explore opportunities, apply for jobs, and track applications, while recruiters can post jobs and manage candidates efficiently.
+
+This project demonstrates real-world full-stack development using modern technologies and best practices.
+
+---
 
 ## ✨ Features
 
-### 👤 Job Seekers (USER)
-- Browse and search jobs with filters (keyword, location, category, salary, experience)
-- Apply to jobs with cover letters
-- Track application status (Applied → Shortlisted → Accepted/Rejected)
-- Upload resume (PDF)
-- Profile management
+### 👤 Job Seeker (User)
 
-### 🏢 Recruiters (RECRUITER)
-- Create and manage companies
-- Post, edit, and delete job listings
-- View and manage applicants
-- Update application statuses
-
-### ⚙️ Administrators (ADMIN)
-- Platform-wide statistics dashboard
-- User management (view, delete)
-- Job moderation
-
-### 🔐 Security
-- JWT-based authentication (stateless)
-- Role-based access control (USER, RECRUITER, ADMIN)
-- BCrypt password encryption
-- Protected API endpoints
+* User registration & login (JWT authentication)
+* Create and update profile
+* Browse and search jobs
+* Apply for jobs
+* Upload resume (PDF)
+* Track application status (Applied, Shortlisted, Rejected)
 
 ---
 
-## 🚀 Quick Start
+### 🏢 Recruiter
 
-### Prerequisites
-- **Java 21+**
-- **Node.js 18+**
-- **Docker & Docker Compose**
+* Create, update, and delete job postings
+* View applicants for each job
+* Manage application status
 
-### Option 1: Docker Compose (Recommended)
+---
 
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/CareerNest.git
-cd CareerNest
+### 🛠️ Admin
 
-# Start all services
-docker-compose up --build
+* Manage users and recruiters
+* Moderate job listings
+* Monitor platform activity
+
+---
+
+### 🔎 Job Search & Filtering
+
+* Search by keyword, location, category
+* Advanced filters (salary, experience, job type)
+* Pagination & sorting
+
+---
+
+## 🧠 Tech Stack
+
+### 💻 Backend
+
+* Java (Core + Advanced)
+* Spring Boot
+* Spring Security (JWT Authentication)
+* Hibernate / JPA
+* REST APIs
+
+### 🎨 Frontend
+
+* React.js
+* HTML5, CSS3, JavaScript
+* Axios
+
+### 🗄️ Database
+
+* MySQL / PostgreSQL
+
+### ⚙️ Tools & DevOps
+
+* Git & GitHub
+* Docker
+* Postman
+
+---
+
+## 🏗️ Architecture
+
+* Layered Architecture:
+
+  * Controller
+  * Service
+  * Repository
+  * DTO
+* RESTful API design
+* Role-Based Access Control (RBAC)
+* Scalable & modular structure
+
+---
+
+## 🗂️ Project Structure
+
+### Backend (Spring Boot)
+
+```
+src/
+ ├── controller/
+ ├── service/
+ ├── repository/
+ ├── entity/
+ ├── dto/
+ ├── config/
+ └── security/
 ```
 
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8080
-- **PostgreSQL**: localhost:5432
+### Frontend (React)
 
-### Option 2: Local Development
-
-#### 1. Start PostgreSQL
-```bash
-docker-compose up postgres
+```
+src/
+ ├── components/
+ ├── pages/
+ ├── services/
+ ├── hooks/
+ └── context/
 ```
 
-#### 2. Start Backend
+---
+
+## 🧾 Database Design
+
+### Entities:
+
+* User
+* Role
+* Job
+* Application
+* Company
+* Resume
+
+### Relationships:
+
+* One User → Many Applications
+* One Job → Many Applications
+* One Company → Many Jobs
+
+---
+
+## 🔐 Authentication & Security
+
+* JWT-based authentication
+* Role-based authorization (USER, RECRUITER, ADMIN)
+* Secure REST APIs
+* Input validation & exception handling
+
+---
+
+## 🚀 Getting Started
+
+### 🔧 Prerequisites
+
+* Java (JDK 8+)
+* Node.js & npm
+* MySQL / PostgreSQL
+* Git
+
+---
+
+### ⚙️ Backend Setup
+
 ```bash
 cd backend
-./mvnw spring-boot:run    # Linux/Mac
-mvnw.cmd spring-boot:run  # Windows
+mvn clean install
+mvn spring-boot:run
 ```
 
-#### 3. Start Frontend
+---
+
+### 🎨 Frontend Setup
+
 ```bash
 cd frontend
 npm install
-npm run dev
-```
-
-- **Frontend**: http://localhost:5173
-- **Backend API**: http://localhost:8080
-
----
-
-## 📁 Project Structure
-
-```
-CareerNest/
-├── backend/                    # Spring Boot application
-│   ├── src/main/java/com/careernest/
-│   │   ├── config/             # Security, CORS, data seeder
-│   │   ├── controller/         # REST controllers (7)
-│   │   ├── dto/                # Request/Response DTOs
-│   │   ├── entity/             # JPA entities (6)
-│   │   ├── enums/              # Enum types (4)
-│   │   ├── exception/          # Global exception handler
-│   │   ├── repository/         # Spring Data repositories (6)
-│   │   ├── security/           # JWT provider, filters, UserDetails
-│   │   └── service/            # Business logic services (6)
-│   ├── src/main/resources/
-│   │   └── application.properties
-│   ├── Dockerfile
-│   └── pom.xml
-├── frontend/                   # React application
-│   ├── src/
-│   │   ├── api/                # Axios instance + API services
-│   │   ├── components/         # Reusable UI components
-│   │   ├── context/            # Auth context (JWT state)
-│   │   ├── pages/              # Page components
-│   │   │   ├── auth/           # Login, Register
-│   │   │   ├── jobs/           # Job listing, Job detail
-│   │   │   ├── user/           # User dashboard
-│   │   │   ├── recruiter/      # Recruiter dashboard
-│   │   │   └── admin/          # Admin panel
-│   │   └── routes/             # Protected route component
-│   ├── Dockerfile
-│   ├── nginx.conf
-│   └── package.json
-├── docker-compose.yml
-└── README.md
+npm start
 ```
 
 ---
 
-## 🔌 API Endpoints
+### 🐳 Docker Setup (Optional)
 
-| Method | Endpoint | Access | Description |
-|--------|----------|--------|-------------|
-| POST | `/api/auth/register` | Public | Register |
-| POST | `/api/auth/login` | Public | Login |
-| GET | `/api/users/me` | Auth | Profile |
-| PUT | `/api/users/me` | Auth | Update profile |
-| GET | `/api/jobs` | Public | List jobs |
-| GET | `/api/jobs/{id}` | Public | Job details |
-| GET | `/api/jobs/search` | Public | Search jobs |
-| POST | `/api/jobs` | Recruiter | Create job |
-| PUT | `/api/jobs/{id}` | Recruiter | Update job |
-| DELETE | `/api/jobs/{id}` | Recruiter/Admin | Delete job |
-| POST | `/api/applications/{jobId}` | User | Apply |
-| GET | `/api/applications/my` | User | My applications |
-| GET | `/api/applications/job/{id}` | Recruiter | Job applicants |
-| PUT | `/api/applications/{id}/status` | Recruiter | Update status |
-| POST | `/api/companies` | Recruiter | Create company |
-| GET | `/api/companies` | Public | List companies |
-| POST | `/api/resumes/upload` | User | Upload resume |
-| GET | `/api/admin/stats` | Admin | Platform stats |
-| GET | `/api/admin/users` | Admin | List users |
+```bash
+docker build -t careernest-backend .
+docker build -t careernest-frontend .
+docker-compose up
+```
 
 ---
 
-## 🛠 Tech Stack
+## 📡 API Features
 
-| Component | Technology |
-|-----------|-----------|
-| Backend | Java 21, Spring Boot 4, Spring Security, Spring Data JPA |
-| Auth | JWT (jjwt 0.12.6) |
-| Database | PostgreSQL 16 |
-| ORM | Hibernate 6 |
-| Frontend | React 18, React Router 6, Axios, Vite |
-| Styling | Vanilla CSS (Premium Dark Theme) |
-| Containerization | Docker, Docker Compose |
-| Web Server | Nginx (production) |
+* Authentication APIs (Login/Register)
+* Job CRUD APIs
+* Application APIs
+* User & Recruiter management
+* Search & filter APIs
+
+---
+
+## 📸 Screenshots
+
+> Add your UI screenshots here (Highly recommended for recruiters)
+
+---
+
+## 🧪 Future Enhancements
+
+* Microservices architecture
+* Email notifications
+* AI-based job recommendations
+* Resume parsing
+* Real-time chat between recruiter and candidate
+
+---
+
+## 📈 What This Project Demonstrates
+
+* Full-stack development skills
+* REST API design
+* Database modeling
+* Authentication & security
+* Clean architecture & scalability
+* Real-world problem solving
+
+---
+
+## 🤝 Contribution
+
+Contributions are welcome! Feel free to fork the repository and submit pull requests.
+
+---
+
+## 📬 Contact
+
+If you have any questions or suggestions, feel free to reach out.
+
+---
+
+## ⭐ Show Your Support
+
+If you like this project, please ⭐ the repository and share it!
 
 ---
