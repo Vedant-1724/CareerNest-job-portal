@@ -67,7 +67,7 @@ This project demonstrates real-world full-stack development using modern technol
 
 ### 🗄️ Database
 
-* MySQL / PostgreSQL
+* MySQL
 
 ### ⚙️ Tools & DevOps
 
