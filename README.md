@@ -176,7 +176,3 @@ CareerNest/
 | Web Server | Nginx (production) |
 
 ---
-
-## 📝 License
-
-This project is for educational/portfolio purposes.
