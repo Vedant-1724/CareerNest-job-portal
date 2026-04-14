@@ -198,12 +198,6 @@ docker-compose up
 
 ---
 
-## 📸 Screenshots
-
-> Add your UI screenshots here (Highly recommended for recruiters)
-
----
-
 ## 🧪 Future Enhancements
 
 * Microservices architecture
